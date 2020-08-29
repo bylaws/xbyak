@@ -2659,6 +2659,14 @@ public:
 		labelMgr_.reset();
 		labelMgr_.set(this);
 	}
+
+	void setNewBuffer(void* ptr, size_t size)
+	{
+		reset();
+		top_ = reinterpret_cast<uint8_t*>(ptr);
+		maxSize_ = size;
+	}
+
 	bool hasUndefinedLabel() const { return labelMgr_.hasUndefSlabel() || labelMgr_.hasUndefClabel(); }
 	/*
 		MUST call ready() to complete generating code if you use AutoGrow mode.

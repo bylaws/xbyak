@@ -1038,13 +1038,6 @@ public:
 	}
 	void db(int code)
 	{
-		if (size_ >= maxSize_) {
-			if (type_ == AUTO_GROW) {
-				growMemory();
-			} else {
-				XBYAK_THROW(ERR_CODE_IS_TOO_BIG)
-			}
-		}
 		top_[size_++] = static_cast<uint8>(code);
 	}
 	void db(const uint8 *code, size_t codeSize)

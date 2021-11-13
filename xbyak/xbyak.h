@@ -2387,6 +2387,7 @@ public:
 	// set default type of `jmp` of undefined label to T_NEAR
 	void setDefaultJmpNEAR(bool isNear) { isDefaultJmpNEAR_ = isNear; }
 	void jmp(const Operand& op) { opR_ModM(op, BIT, 4, 0xFF, NONE, NONE, true); }
+	void jmpf(const Operand& op) { opR_ModM(op, BIT, 5, 0xFF, NONE, NONE, true); }
 	void jmp(std::string label, LabelType type = T_AUTO) { opJmp(label, type, 0xEB, 0xE9, 0); }
 	void jmp(const char *label, LabelType type = T_AUTO) { jmp(std::string(label), type); }
 	void jmp(const Label& label, LabelType type = T_AUTO) { opJmp(label, type, 0xEB, 0xE9, 0); }

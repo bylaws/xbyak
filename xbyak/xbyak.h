@@ -2057,6 +2057,16 @@ private:
 		db(code | (idx & 7));
 		return bit / 8;
 	}
+
+	void mov_imm64(const Reg& reg, uint64 imm)
+	{
+		int bit = reg.getBit();
+		const int idx = reg.getIdx();
+		int code = 0xB0 | ((bit == 8 ? 0 : 1) << 3);
+    rex(reg);
+		db(code | (idx & 7));
+	}
+
 	template<class T>
 	void putL_inner(T& label, bool relative = false, size_t disp = 0)
 	{
@@ -2509,6 +2519,12 @@ public:
 		} else {
 			XBYAK_THROW(ERR_BAD_COMBINATION)
 		}
+	}
+
+	void mov64(const Reg& reg, uint64 imm)
+	{
+    mov_imm64(reg, imm);
+    db(imm, 8);
 	}
 
 	// The template is used to avoid ambiguity when the 2nd argument is 0.
